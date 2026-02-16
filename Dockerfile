@@ -43,6 +43,9 @@ RUN bun install --production || bun install
 # Install tsx for TypeScript runtime support
 RUN bun install -g tsx@latest || npm install -g tsx@latest
 
+# Ensure bun's global bin is on PATH so tsx is discoverable when installed by bun
+ENV PATH=/root/.bun/bin:${PATH}
+
 # Copy prisma schema and migrations
 COPY prisma ./prisma
 
