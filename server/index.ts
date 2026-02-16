@@ -2,11 +2,15 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
+import { fileURLToPath } from "url";
 import { PrismaClient } from "@prisma/client";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const prisma = new PrismaClient();
@@ -18,7 +22,8 @@ app.use(express.json());
 app.use(cors());
 
 // Serve static files from the dist folder
-const distPath = path.join(__dirname, "../dist");
+const distPath = path.resolve(__dirname, "../dist");
+console.log(`Serving static files from: ${distPath}`);
 app.use(express.static(distPath));
 
 // Types
@@ -392,17 +397,23 @@ app.get("*", (req: Request, res: Response) => {
 // Start server
 const startServer = async () => {
   try {
-    await prisma.$connect();
-    console.log("✓ Connected to PostgreSQL database");
-
-    // Create default admin user
-    await createDefaultAdmin();
+    // Try to connect to database
+    try {
+      await prisma.$connect();
+      console.log("✓ Connected to PostgreSQL database");
+      // Create default admin user
+      await createDefaultAdmin();
+    } catch (dbError) {
+      console.warn("⚠ Warning: Database connection failed. API routes will not work, but frontend will be served.");
+      console.warn(`  Error: ${dbError}`);
+    }
 
     app.listen(PORT, () => {
       console.log(
-        `\n✓ Auth backend server running on http://localhost:${PORT}`
+        `\n✓ Server running on http://localhost:${PORT}`
       );
-      console.log(`\nAvailable endpoints:`);
+      console.log(`✓ Frontend will be served from dist folder`);
+      console.log(`\nAvailable API endpoints:`);
       console.log(`  POST   /api/auth/register`);
       console.log(`  POST   /api/auth/login`);
       console.log(`  POST   /api/auth/forgot-password`);

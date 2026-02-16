@@ -35,11 +35,13 @@ COPY bun.lockb ./
 # Install bun
 RUN npm install -g bun
 
-# Install production dependencies only
-RUN bun install --production
+# Install production dependencies only (allow fallback if lockfile is frozen)
+# If `bun install --production` fails due to a frozen lockfile, fall back to
+# a full `bun install` so the container can still be built in CI/CD.
+RUN bun install --production || bun install
 
 # Install tsx for TypeScript runtime support
-RUN bun install -g tsx@latest
+RUN bun install -g tsx@latest || npm install -g tsx@latest
 
 # Copy prisma schema and migrations
 COPY prisma ./prisma

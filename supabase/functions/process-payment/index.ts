@@ -136,7 +136,16 @@ Deno.serve(async (req) => {
       .maybeSingle();
 
     const now = new Date();
-    const periodDays = billing_period === "annual" ? 365 : 30;
+    let periodDays = 30; // default to 1 month
+    
+    if (billing_period === "3month") {
+      periodDays = 90;
+    } else if (billing_period === "6month") {
+      periodDays = 180;
+    } else if (billing_period === "1year") {
+      periodDays = 365;
+    }
+    
     const periodEnd = new Date(now.getTime() + periodDays * 24 * 60 * 60 * 1000);
 
     if (existingSub) {

@@ -34,7 +34,7 @@ const Payment = () => {
   const { user, profile, session } = useAuth();
 
   const planId = searchParams.get("plan_id");
-  const billing = searchParams.get("billing") || "monthly";
+  const billing = searchParams.get("billing") || "1month";
 
   const [plan, setPlan] = useState<PlanData | null>(null);
   const [loadingPlan, setLoadingPlan] = useState(true);
@@ -74,7 +74,33 @@ const Payment = () => {
       });
   }, [planId]);
 
-  const price = plan ? (billing === "annual" ? plan.price_annual : plan.price_monthly) : 0;
+  const getPrice = (billingPeriod: string) => {
+    if (!plan) return 0;
+    if (billingPeriod === "3month") {
+      return plan.price_monthly * 3 * 0.92; // 8% discount
+    } else if (billingPeriod === "6month") {
+      return plan.price_monthly * 6 * 0.85; // 15% discount
+    } else if (billingPeriod === "1year") {
+      return plan.price_annual;
+    }
+    return plan.price_monthly;
+  };
+
+  const price = getPrice(billing);
+
+  const getBillingLabel = (billingPeriod: string) => {
+    switch (billingPeriod) {
+      case "3month":
+        return "3 months";
+      case "6month":
+        return "6 months";
+      case "1year":
+        return "annually";
+      case "1month":
+      default:
+        return "monthly";
+    }
+  };
 
   const processSubscription = useCallback(async (reference: string, transactionId?: string) => {
     if (!session || !plan) return;
@@ -310,7 +336,7 @@ const Payment = () => {
                   </div>
                   <div>
                     <p className="font-heading text-lg font-bold text-foreground">{plan.name} Plan</p>
-                    <p className="text-sm text-muted-foreground">Billed {billing === "annual" ? "annually" : "monthly"}</p>
+                    <p className="text-sm text-muted-foreground">Billed {getBillingLabel(billing)}</p>
                   </div>
                 </div>
                 <div className="space-y-2.5">
@@ -324,7 +350,7 @@ const Payment = () => {
                 </div>
                 <div className="border-t border-border pt-4 space-y-3">
                   <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>{plan.name} Plan ({billing})</span>
+                    <span>{plan.name} Plan ({getBillingLabel(billing)})</span>
                     <span>₦{price.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm text-muted-foreground">
