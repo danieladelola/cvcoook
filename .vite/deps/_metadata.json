@@ -1,8 +1,91 @@
 {
-  "hash": "61ad6d41",
+  "hash": "8aaf4df3",
   "configHash": "78c6285e",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "6448fed6",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "11ce6a04",
+  "browserHash": "cc88ec8e",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "f248c3d5",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "948893d6",
+      "needsInterop": true
+    },
+    "@tanstack/react-query": {
+      "src": "../../node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "21a8589a",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "98847fba",
+      "needsInterop": false
+    },
+    "next-themes": {
+      "src": "../../node_modules/next-themes/dist/index.mjs",
+      "file": "next-themes.js",
+      "fileHash": "1bcbe0e4",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "61f1c5c0",
+      "needsInterop": true
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "81377952",
+      "needsInterop": false
+    },
+    "jspdf": {
+      "src": "../../node_modules/jspdf/dist/jspdf.es.min.js",
+      "file": "jspdf.js",
+      "fileHash": "a350f4b6",
+      "needsInterop": false
+    },
+    "qrcode.react": {
+      "src": "../../node_modules/qrcode.react/lib/esm/index.js",
+      "file": "qrcode__react.js",
+      "fileHash": "19c5a787",
+      "needsInterop": false
+    },
+    "recharts": {
+      "src": "../../node_modules/recharts/es6/index.js",
+      "file": "recharts.js",
+      "fileHash": "177e6477",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "html2canvas.esm-WSHDVPYS": {
+      "file": "html2canvas__esm-WSHDVPYS.js"
+    },
+    "purify.es-X4TDWS4Y": {
+      "file": "purify__es-X4TDWS4Y.js"
+    },
+    "index.es-MSNYVCFE": {
+      "file": "index__es-MSNYVCFE.js"
+    },
+    "chunk-PV7ZWGTI": {
+      "file": "chunk-PV7ZWGTI.js"
+    },
+    "chunk-2CLD7BNN": {
+      "file": "chunk-2CLD7BNN.js"
+    },
+    "chunk-SITVF2AJ": {
+      "file": "chunk-SITVF2AJ.js"
+    },
+    "chunk-WOOG5QLI": {
+      "file": "chunk-WOOG5QLI.js"
+    }
+  }
 }
