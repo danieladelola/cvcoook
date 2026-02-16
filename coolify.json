@@ -1,0 +1,33 @@
+{
+  "buildPacks": [
+    {
+      "name": "nodejs",
+      "nodeVersion": "22"
+    }
+  ],
+  "build": {
+    "commands": [
+      "npm ci",
+      "npm run build"
+    ]
+  },
+  "start": {
+    "command": "tsx server/index.ts"
+  },
+  "ports": [
+    {
+      "port": 3000,
+      "protocol": "http"
+    }
+  ],
+  "environment": {
+    "NODE_ENV": "production",
+    "PORT": "3000"
+  },
+  "healthCheck": {
+    "endpoint": "/api/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  }
+}

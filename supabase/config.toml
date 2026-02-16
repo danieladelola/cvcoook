@@ -1,0 +1,13 @@
+project_id = "nuekqaghhgwemfhopsto"
+
+[functions.generate-cover-letter]
+verify_jwt = false
+
+[functions.cv-ai-assist]
+verify_jwt = false
+
+[functions.process-payment]
+verify_jwt = false
+
+[functions.extract-cv]
+verify_jwt = false

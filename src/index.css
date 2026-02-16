@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CV Generator Design System - Black, White & Red */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
+    
+    --primary: 0 0% 5%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 80% 50%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 40%;
+    
+    --accent: 0 80% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 5%;
+    
+    --radius: 0.625rem;
+    
+    --hero-gradient-start: 0 0% 5%;
+    --hero-gradient-mid: 0 0% 8%;
+    --hero-gradient-end: 0 0% 12%;
+    
+    --coral-start: 0 80% 50%;
+    --coral-end: 0 85% 45%;
+    
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 5%;
+    --sidebar-primary: 0 0% 5%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 5%;
+    --sidebar-border: 0 0% 92%;
+    --sidebar-ring: 0 0% 5%;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+    
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 5%;
+    
+    --secondary: 0 80% 50%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 0 80% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 80%;
+    
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 80% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hero-gradient-start)) 0%,
+      hsl(var(--hero-gradient-mid)) 50%,
+      hsl(var(--hero-gradient-end)) 100%
+    );
+  }
+  
+  .btn-coral {
+    @apply inline-flex items-center justify-center font-semibold transition-all duration-200;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--coral-start)) 0%,
+      hsl(var(--coral-end)) 100%
+    );
+    box-shadow: 0 4px 14px -3px hsla(0, 80%, 50%, 0.4);
+  }
+  
+  .btn-coral:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -3px hsla(0, 80%, 50%, 0.5);
+  }
+  
+  .btn-outline-hero {
+    @apply inline-flex items-center justify-center font-semibold transition-all duration-200;
+    @apply border-2 border-white/30 text-white bg-white/5;
+  }
+  
+  .btn-outline-hero:hover {
+    @apply border-white/50 bg-white/10;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -12px hsla(0, 0%, 0%, 0.15);
+  }
+  
+  .template-card {
+    @apply relative overflow-hidden rounded-lg bg-card border border-border;
+    transition: all 0.3s ease;
+  }
+  
+  .template-card:hover {
+    @apply border-secondary;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px -15px hsla(0, 80%, 50%, 0.2);
+  }
+  
+  .feature-icon {
+    @apply w-16 h-16 rounded-2xl flex items-center justify-center;
+    background: linear-gradient(135deg, hsl(var(--secondary) / 0.1) 0%, hsl(var(--secondary) / 0.05) 100%);
+  }
+  
+  .step-number {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold;
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--coral-end)) 100%);
+    color: white;
+  }
+  
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+  
+  .blob {
+    @apply absolute rounded-full opacity-20 blur-3xl;
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--secondary)) 100%);
+  }
+}
