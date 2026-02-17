@@ -13,9 +13,12 @@ COPY bun.lockb ./
 
 # Install dependencies (including dev for build tools)
 RUN bun install
-
 # Copy source code
 COPY . .
+
+# Generate Prisma client in builder so it exists for runtime
+# Ensure the Prisma schema is present before generating
+RUN npx prisma generate
 
 # Build frontend
 RUN npm run build
@@ -48,6 +51,10 @@ ENV PATH=/root/.bun/bin:${PATH}
 
 # Copy prisma schema and migrations
 COPY prisma ./prisma
+
+# Copy generated Prisma client from builder (so @prisma/client is initialized)
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 # Copy built application files
 COPY --from=builder /app/dist ./dist
